@@ -215,7 +215,10 @@ void UVCD_Item_Element_Array(char *filename, int indent_level, char *vartype, ch
     for (int i = 0; i < indent_level; i++) {
         strcat(indentation, "    ");
     }
-    fprintf(file, "%s%s %s = { ", indentation, vartype, name); 
+    fprintf(file, "%s%s %s = { ", indentation, vartype, name);
+    if (strstrcmp(vartype, "char *")) { 
+        fprintf(file, "\"%s\"", ((char *)variable)); 
+    }  
     for (size_t i = 0; i < length_ptr; i++) { 
         if (strcmp(vartype, "int *") == 0 ) {
             fprintf(file, "%d", ((int*)variable)[i]);
@@ -238,9 +241,6 @@ void UVCD_Item_Element_Array(char *filename, int indent_level, char *vartype, ch
             fprintf(file, ", ");
         }
     }
-    if (strstrcmp(vartype, "char *") == 0) { 
-        fprintf(file, "\"%s\"", ((char *)variable)); 
-    } 
     fprintf(file, " };\n\n");
     fclose(file);
 }
