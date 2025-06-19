@@ -649,9 +649,9 @@ char *replace_value(const char *str, void *new_value, const char *type) {
     } else if (strcmp(type, "char *") == 0) {
         snprintf(temp, sizeof(temp), " \"%s\"", *(char*)new_value);
     } else if (strcmp(type, "int *") == 0) {
-        snprintf(temp, sizeof(temp), " %d", *(double*)new_value);
+        snprintf(temp, sizeof(temp), " %d", *(int*)new_value);
     } else if (strcmp(type, "float *") == 0) {
-        snprintf(temp, sizeof(temp), " %f", *(double*)new_value);
+        snprintf(temp, sizeof(temp), " %f", *(float*)new_value);
     } else if (strcmp(type, "double *") == 0) {
         snprintf(temp, sizeof(temp), " %f", *(double*)new_value);
     } else {
