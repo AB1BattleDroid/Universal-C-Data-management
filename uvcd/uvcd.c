@@ -219,9 +219,9 @@ void UVCD_Item_Element_Array(char *filename, int indent_level, char *vartype, ch
     for (size_t i = 0; i < length_ptr; i++) { 
         if (strcmp(vartype, "int *") == 0 ) {
             fprintf(file, "%d", ((int*)variable)[i]);
-        } else if (strstrcmp(vartype, "double *") == 0) { 
+        } else if (strstrcmp(vartype, "double *")) { 
             fprintf(file, "%f", ((double*)variable)[i]);
-        } else if (strstrcmp(vartype, "float *") == 0) { 
+        } else if (strstrcmp(vartype, "float *")) { 
             fprintf(file, "%f", ((float*)variable)[i]);
         } else if (strstrcmp(vartype, "int [") && strstrcmp(vartype, "]")) {
             fprintf(file, "%d", ((int*)variable)[i]);
@@ -644,6 +644,16 @@ char *replace_value(const char *str, void *new_value, const char *type) {
         snprintf(temp, sizeof(temp), " %.2f", *(float*)new_value);
     } else if (strcmp(type, "double") == 0) {
         snprintf(temp, sizeof(temp), " %lf", *(double*)new_value);
+    } else if (strcmp(type, "char") == 0) {
+        snprintf(temp, sizeof(temp), " \'%c\'", *(char*)new_value);
+    } else if (strcmp(type, "char *") == 0) {
+        snprintf(temp, sizeof(temp), " \"%s\"", *(char*)new_value);
+    } else if (strcmp(type, "int *") == 0) {
+        snprintf(temp, sizeof(temp), " %d", *(double*)new_value);
+    } else if (strcmp(type, "float *") == 0) {
+        snprintf(temp, sizeof(temp), " %f", *(double*)new_value);
+    } else if (strcmp(type, "double *") == 0) {
+        snprintf(temp, sizeof(temp), " %f", *(double*)new_value);
     } else {
         fprintf(stderr, "Error: Unknown type '%s'\n", type);
         return strdup(str);
